@@ -9,13 +9,15 @@ import SearchIcon from '@material-ui/icons/Search'
 import PersonIcon from '@material-ui/icons/Person'
 import { Link } from 'react-router-dom';
 import NotifIcon from '@material-ui/icons/Grade'
+import NotificationsIcon from '@material-ui/icons/Notifications';
 
 const styles = {
   root: {
-    width: 500,
+   
     width: '100%',
     position: 'fixed',
     bottom: 0
+   
   }
 }; 
 
@@ -41,7 +43,7 @@ class SimpleBottomNavigation extends React.Component {
       >
         <BottomNavigationAction label="Search" icon={<SearchIcon />} component={Link} to="/"/>
         <BottomNavigationAction label="Swipe" icon={<FavoriteIcon />} component={Link} to="/swipe" />
-        <BottomNavigationAction label="Nofications" icon={<LocationOnIcon />} component={Link} to="/notifications"/>
+        <BottomNavigationAction label="Nofications" icon={<NotificationsIcon />} component={Link} to="/notifications"/>
         <BottomNavigationAction label="Profile" icon={<PersonIcon />} component={Link} to="/profile"/>
       </BottomNavigation>
     );

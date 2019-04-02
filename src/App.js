@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
-import './App.css';
+
 import SorteoStepper from './components/SorteoStepper'
 import SimpleBottomNavigation from './components/BottomNavigation'
 import Grid from '@material-ui/core/Grid';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Search from './components/search'
-import Notifications from './components/notifications'
-import Swipe from './components/swipe'
-import Profile from './components/profile'
-
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from 'react-router-dom'
+import Search from './components/basic/search'
+import Notifications from './components/basic/notifications'
+import Swipe from './components/basic/swipe'
+import Profile from './components/basic/profile'
+import PrivateRoute from './components/auth/PrivateRoute'
+import Login from './components/auth/login'
 
 
 
@@ -20,20 +27,23 @@ class App extends Component {
   render() {
     return (
     <Router>
-      <Grid container spacing={24}>
-        <Grid item xs={12}>
+      <Grid container >
+        <Grid  xs={12}>
                 <div className="App">
-                <Route path="/" exact  component={Search} />
-                <Route path="/swipe/" component={Swipe} />
-                <Route path="/profile/" component={Profile} />
-                <Route path="/notifications/" component={Notifications} />
-                <SimpleBottomNavigation/>
+                <PrivateRoute path="/" exact  component={Search} />
+                <PrivateRoute path="/swipe/" component={Swipe} />
+                <PrivateRoute path="/profile/" component={Profile} />
+                {/* PrivateRoute */}
+                <Route path="/login" component={Login}/>
+                <PrivateRoute path="/notifications/" component={Notifications} />
+                
                 </div>
         </Grid>
+        
       </Grid>
-      
+        <SimpleBottomNavigation/>
 
-      </Router>
+    </Router>
     );
   }
 }

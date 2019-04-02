@@ -28,7 +28,7 @@ const styles = {
         <h2>Search Section </h2>
         
       <Paper  elevation={1} className={classes.pad}>
-      <Grid container spacing={24}>
+      <Grid container >
          <Grid item xs={4}>
             <Avatar alt="Remy Sharp" src="https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Dog-512.png" className={classes.bigAvatar} />
          </Grid>
