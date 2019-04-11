@@ -7,13 +7,15 @@ import {
     withRouter
   } from 'react-router-dom'
 
-import Auth from './authLogic'  
+
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={(props) => (
-      Auth.isLogin()
+     
+      true
         ? <Component {...props} />
         : <Redirect to='/login' />
+      
     )} />
   )
 

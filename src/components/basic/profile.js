@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import SettingsIcon from '@material-ui/icons/Settings'
+import SimpleBottomNavigation from './BottomNavigation'
 
 const styles = {
   avatar: {
@@ -74,6 +75,7 @@ function Profile(props) {
             </Typography>
 
        </Grid>
+       <SimpleBottomNavigation/>
     </Grid>
   );
 }

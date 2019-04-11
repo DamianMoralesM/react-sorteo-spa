@@ -6,7 +6,8 @@ import Typography from '@material-ui/core/Typography';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-
+import SimpleBottomNavigation from './BottomNavigation'
+ 
 
 const styles = {
   avatar: {
@@ -21,6 +22,9 @@ const styles = {
     margin: 10,
   }
 };
+
+
+
 
  function Notifications(props){
     const { classes } = props;
@@ -45,7 +49,7 @@ const styles = {
 
             </Grid>
       </Paper>
-        
+      <SimpleBottomNavigation/>
     </div>
       
       

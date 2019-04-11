@@ -1,4 +1,13 @@
+// Dev
 import React from 'react';
+import { connect } from 'react-redux'
+import { signIn } from '../../store/actions/authActions'
+
+import { signOut } from '../../store/actions/authActions'
+
+
+
+// UI dependencies
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -13,7 +22,8 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
-import Auth from './authLogic'
+/*
+
 const styles = theme => ({
   main: {
     width: 'auto',
@@ -45,14 +55,15 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3,
   },
 });
-
+*/
 class Login extends React.Component {
 
   constructor(props) {
     super(props);
-    this.login = this.login.bind(this);
+ //   this.login = this.login.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    
+    this.logout = this.logout.bind(this);
+    this.isLogin = this.isLogin.bind(this);
     this.state = {
       email: '',
       password: ''
@@ -61,20 +72,29 @@ class Login extends React.Component {
 
   // methods
 
+  //get inputs (email , password )values 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  login(e) {
+  // singIn /Login
+  handleSubmit = (e) => {
     e.preventDefault();
-    Auth.authenticate(this.state.email,this.state.password)
-   
-    
+    this.props.signIn(this.state)
   }
 
   logout(e){
     e.preventDefault();
-    Auth.signout()
+    this.props.signOut()
+  //  Auth.signout()
+  }
+
+  isLogin(e){
+    e.preventDefault()
+  //  let a =  Auth.isLogin()
+    //alert( a )
+    console.log(this.props.auth)
+
   }
  
 
@@ -82,19 +102,24 @@ class Login extends React.Component {
 
   render() {
 
-  const { classes } = this.props;
+  const {  authError, auth } = this.props;
+  
 
   return (
-    <main className={classes.main}>
+    <main // className={classes.main}
+    >
       <CssBaseline />
-      <Paper className={classes.paper}>
-        <Avatar className={classes.avatar}>
+      <Paper //className={classes.paper}
+      >
+        <Avatar // className={classes.avatar}
+        >
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form}>
+        <form //className={classes.form}
+        >
           <FormControl margin="normal" required fullWidth>
             <InputLabel htmlFor="email">Email Address</InputLabel>
             <Input id="email" name="email" autoComplete="email" value={this.state.email} onChange={this.handleChange}  autoFocus />
@@ -113,8 +138,8 @@ class Login extends React.Component {
             fullWidth
             variant="contained"
             color="primary"
-            className={classes.submit}
-            onClick={this.login}
+           // className={classes.submit}
+            onClick={this.handleSubmit}
           >
             Log in
           </Button>
@@ -123,10 +148,20 @@ class Login extends React.Component {
            fullWidth
            variant="contained"
            color="secondary"
-           className={classes.submit}
+         //   className={classes.submit}
            onClick={this.logout}
          >
            Logout
+         </Button>
+         <Button
+           
+           fullWidth
+           variant="contained"
+           color="secondary"
+         //   className={classes.submit}
+           onClick={this.isLogin}
+         >
+           is login
          </Button>
         </form>
       </Paper>
@@ -140,4 +175,19 @@ Login.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Login);
+const mapStateToProps = (state) => {
+  return{
+    authError: state.auth.authError,
+    auth: state.firebase.auth
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signIn: (creds) => dispatch(signIn(creds)),
+    signOut: () => dispatch(signOut())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
+

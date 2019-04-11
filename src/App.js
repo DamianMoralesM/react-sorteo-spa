@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import SorteoStepper from './components/SorteoStepper'
-import SimpleBottomNavigation from './components/BottomNavigation'
+
 import Grid from '@material-ui/core/Grid';
 import {
   BrowserRouter as Router,
@@ -41,7 +41,7 @@ class App extends Component {
         </Grid>
         
       </Grid>
-        <SimpleBottomNavigation/>
+        
 
     </Router>
     );
